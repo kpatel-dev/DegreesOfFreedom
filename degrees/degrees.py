@@ -97,15 +97,15 @@ def shortest_path(source, target):
     start = Node(source, None, None)
     visited.add(start)
     frontier.add(start)
-    
+
     while not frontier.empty():
         curr = frontier.remove()
         if curr.state == target:
             return get_path(curr)
         
         for pair in neighbors_for_person(curr.state):
-            if not any(node.state == pair[0] for node in visited):
-                new_node = Node(pair[0], curr, pair[1])
+            if not any(node.state == pair[1] for node in visited):
+                new_node = Node(pair[1], curr, pair[0])
                 visited.add(new_node)
                 frontier.add(new_node)
         
@@ -114,7 +114,7 @@ def shortest_path(source, target):
 def get_path(node):
     path = list()
     while(node.parent != None):
-        path.append((node.state, node.action))
+        path.append((node.action,node.state))
         node = node.parent
 
     return list(reversed(path))
