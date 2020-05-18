@@ -91,7 +91,6 @@ def shortest_path(source, target):
 
     If no possible path, returns None.
     """
-    # TODO
     frontier = QueueFrontier()
     visited = set()
     start = Node(source, None, None)
@@ -112,6 +111,10 @@ def shortest_path(source, target):
     return None
 
 def get_path(node):
+    """
+    Use backtracking to find the path that led to this node.
+    Return the path to get from the original node to this node.
+    """
     path = list()
     while(node.parent != None):
         path.append((node.action,node.state))
