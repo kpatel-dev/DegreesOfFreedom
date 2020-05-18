@@ -93,15 +93,15 @@ def shortest_path(source, target):
     """
     # TODO
     frontier = QueueFrontier()
-    visited = []
+    visited = set()
     start = Node(source, None, None)
     visited.add(start)
     frontier.add(start)
-
-    while not frontier.empty:
+    
+    while not frontier.empty():
         curr = frontier.remove()
         if curr.state == target:
-            return getPath(curr)
+            return get_path(curr)
         
         for pair in neighbors_for_person(curr.state):
             if not any(node.state == pair[0] for node in visited):
@@ -112,15 +112,12 @@ def shortest_path(source, target):
     return None
 
 def get_path(node):
-    path = set()
+    path = list()
     while(node.parent != None):
-        path.add((node.state, node.action))
+        path.append((node.state, node.action))
         node = node.parent
-    
-    path.add((node.state, None))
-    return reversed(path)
-    raise NotImplemented
 
+    return list(reversed(path))
 
 def person_id_for_name(name):
     """
