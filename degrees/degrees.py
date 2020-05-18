@@ -112,13 +112,13 @@ def shortest_path(source, target):
     return None
 
 def get_path(node):
-    path = []
+    path = set()
     while(node.parent != None):
-        path.add(node.state, node.action)
+        path.add((node.state, node.action))
         node = node.parent
     
-    path.add(node.state, None)
-    return path
+    path.add((node.state, None))
+    return reversed(path)
     raise NotImplemented
 
 
